@@ -1,0 +1,37 @@
+---
+title: Using App Automator for PCF
+owner: CF EATs
+---
+
+<strong><%= modified_date %></strong>
+
+This topic describes how to install App Automator for Pivotal Cloud Foundry (PCF). It also describes how to edit the App Automator for PCF manifest file to define triggers and automated actions. 
+
+## <a id='installing'></a> Install App Automator for PCF
+
+Operators can install App Automator for PCF on one or more spaces in their PCF deployment. Installing App Automator on a space creates space-wide user credentials for accessing App Automator.
+
+To install App Automator for PCF, navigate to the desired space in your PCF environment and run the following command:
+
+```
+cf install-app-automator
+``` 
+
+## <a id='using'></a> Configure App Automator for PCF
+
+Developers can define triggers and automated actions against apps in a space by editing the App Automator for PCF manifest YAML file. 
+
+For more information about triggers and actions, see [App Automator for PCF](../index.html).
+
+To configure the App Automator for PCF, do the following:
+
+1. Navigate to the space in your PCF Deployment on which App Automator for PCF installed.
+1. Open the App Automator manifest YAML file. 
+1. Edit the manifest file and save your changes. Then, run the following command:
+
+	```
+	cf configure-app-automator YOUR-MANIFEST-FILE
+	```
+	Where:
+
+	`YOUR-MANIFEST-FILE` is the name of your App Automator manifest YAML file.
