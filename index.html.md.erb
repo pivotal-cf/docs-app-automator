@@ -9,4 +9,26 @@ This documentation describes App Automator for PCF.
 
 ## About App Automator for PCF
 
-App Automator for PCF automatically scales apps and runs CF tasks based on a metric or schedule. Developers can define these automated actions in a manifest file. For example, App Automator can automatically scale an app up or down based on metrics such as memory or CPU. 
+App Automator for PCF executes automated actions against apps based on triggers. For example, App Automator can automatically scale an app up or down based on metrics such as memory or CPU. Developers define these actions and triggers in an App Automator manifest YAML file. 
+
+Operators can install App Automator for PCF on one or more spaces in a PCF deployment. For more information about installing and configuring App Automator for PCF, see [Using App Automator for PCF](../using.html).
+
+App Automator for PCF combines the functionality of the Autoscaler and Scheduler. 
+
+## About Triggers and Actions
+
+App Automator for PCF executes automated actions against apps based on triggers. 
+
+### About Actions
+
+App Automator executes automated actions against an app when the conditions of a given trigger are met. The following are the types of App Automator actions:
+
+	- **Scale**: Scales an app by a specific number of instances, or to a specific number of instances. For example, an App Automator action can scale an app up by two instances. It can also scale an app to a total of two instances. 
+	- **CF Task**: Performs a CF Task. For example, a CF Task action can configure memory or disk quota for an app.
+
+### About Triggers
+
+When the conditions of a trigger are met, App Automator executes the associated automated actions against an app. The following are the types of App Automator triggers:
+
+	- **Metric**:
+	- **Schedule**:
