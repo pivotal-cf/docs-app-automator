@@ -1,55 +1,27 @@
 ---
-title: Using App Automator for PCF
+title: Configuring App Automator for PCF
 owner: CF EATs
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to install App Automator for Pivotal Cloud Foundry (PCF). It also describes how to create and configure the App Automator for PCF manifest file. 
+This topic describes how to define custom triggers and actions for App Automator for Pivotal Cloud Foundry (PCF). It also describes how to configure App Automator for PCF to apply these triggers and actions. 
 
-## <a id='installing'></a> Install App Automator for PCF
-
-Operators can install App Automator for PCF on one or more spaces in their PCF deployment. App Automator can be used to define triggers and actions for apps within the given space.
-
-Installing App Automator on a space creates space-wide user credentials. The username is `pvtl_appauto_SPACE_GUID`, where `SPACE_GUID` is the GUID of the space where App Automator is installed. The operator defines the password as part of the command for installing App Automator. 
-
-To install App Automator for PCF, navigate to the desired space in your PCF deployment, and run the following command:
-
-```
-cf install-app-automator -p PASSWORD
-``` 
-
-Where:
-
-- `PASSWORD` is a space-wide password for accessing App Automator. 
-
-## <a id='configure'></a> Configure App Automator for PCF
-
-Developers can define triggers and associated actions for App Automator by creating a manifest file, then configuring App Automator with the manifest file. For more information about defining triggers and actions in the manifest file, see [About Triggers and Actions](#triggers-actions) below.
-
-To configure App Automator, create or edit the App Automator manifest file, then run the following command:
-
-```
-cf configure-app-automator MY-MANIFEST-FILE
-```
-
-Where:
-
-  - `MY-MANIFEST-FILE` is the name of the App Automator manifest YAML file.
-
-### <a id='triggers-actions'></a> About Triggers and Actions
+## <a id='triggers-actions'></a> Define Triggers and Actions
 
 App Automator for PCF executes automated actions against an app when the conditions of a given trigger are met. App Automator includes types of triggers and actions that developers can define in an App Automator manifest file.
 
-The following are the types of App Automator triggers:
+The following are App Automator triggers:
 
 - **Metric**: Metric triggers set a threshold for an app metric. For example, App Automator can execute an action when CPU is greater than 80%.
 - **Schedule**: Schedule triggers set a regular schedule for App Automator to execute an action. For example, App Automator can execute an action every 15 minutes.
 
-The following are the types of App Automator actions:
+The following are App Automator actions:
 
 - **Scale**: A scale action scales an app either by or to a specific number of instances. For example, an App Automator action can scale an app up by two instances. It can also scale an app to a total of two instances. 
 - **cf_task**: A cf\_task action executes a task. For example, a cf_task action can run a command or configure memory for an app. 
+
+To define triggers and actions for App Automator for PCF, create a manifest YAML file and define the desired triggers and actions in the file.  
 
 The example YAML file below executes a `cf_task` action every 15 minutes. The action runs a command and sets the memory and disk quota for the specified app.
 
@@ -75,3 +47,17 @@ Where:
 - `MY-APP` is the name of the app against which App Automator executes the action.
 - `MY COMMAND` is a command associated with the `cf_task` action.
 - `my-action` is the name of the action.  
+
+## <a id='configure'></a> Configure App Automator for PCF
+
+Developers can configure App Automator to apply the triggers and actions they defined in the App Automator manifest file. For more information about defining triggers and actions in the manifest file, see [Define Triggers and Actions](#triggers-actions).
+
+To configure App Automator, run the following command:
+
+```
+cf configure-app-automator MY-MANIFEST-FILE
+```
+
+Where:
+
+  - `MY-MANIFEST-FILE` is the name of the App Automator manifest YAML file.

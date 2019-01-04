@@ -1,14 +1,42 @@
 ---
-title: App Automator for PCF
+title: Installing App Automator for PCF
 owner: CF EATs
 ---
 
 <strong><%= modified_date %></strong>
 
-This documentation describes App Automator for PCF. It includes information about installing and configuring App Automator. It also describes how developers can define triggers and actions in App Automator to configure automated actions for apps.
+This topic describes how to install App Automator for Pivotal Cloud Foundry (PCF).
 
-## About App Automator for PCF
+## <a id='about'></a> About App Automator for PCF
 
-App Automator for PCF executes automated actions against apps based on triggers. For example, App Automator can automatically scale an app up or down when app metrics, such as memory or CPU, reach a given threshold. Developers can define custom actions and triggers in an App Automator manifest file. 
+App Automator for PCF executes automated actions against apps based on triggers. For example, App Automator can automatically scale an app up or down when app metrics, such as memory or CPU, reach a given threshold. 
 
-Operators can install App Automator for PCF on one or more spaces in a PCF deployment. For more information about installing and configuring App Automator, see [Using App Automator for PCF](../using.html).
+Developers can define custom actions and triggers in an App Automator manifest file. For more information about configuring App Automator for PCF, see [Configuring App Automator for PCF](./using.html).
+
+## <a id='installing'></a> Download and Install App Automator for PCF
+
+Operators can install App Automator for PCF on one or more spaces in their PCF deployment. App Automator can be used to define triggers and actions for apps within the given space.
+
+To install App Automator for PCF, do the following:
+
+  1. Download App Automator for PCF from PivNet. Run the following command to install the plugin on your deployment:
+
+	```
+  	cf install-plugin PATH-TO-PLUGIN
+  	```
+
+  	Where `PATH-TO-PLUGIN` is the path to the App Automator plugin on your local machine.
+
+  1. Navigate to the desired space in your PCF deployment. Run the following command to install App Automator on the space:
+
+	```
+	cf install-app-automator -p PASSWORD
+	``` 
+
+	Where `PASSWORD` is a space-wide password for accessing App Automator. 
+
+## <a id='accessing'></a> Access App Automator for PCF
+
+Installing App Automator on a space creates space-wide user credentials. The username is `pvtl_appauto_SPACE_GUID`, where `SPACE_GUID` is the GUID of the space where App Automator is installed. The operator defines the password as part of the command for installing App Automator.
+
+Users are prompted for App Automator login credentials To access App Automator for PCF via the cf CLI, enter the App Automator login credentials for the given space. 
