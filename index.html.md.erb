@@ -11,15 +11,22 @@ This topic describes how to install App Automator for Pivotal Cloud Foundry (PCF
 
 App Automator for PCF executes automated actions against apps based on triggers. For example, App Automator can automatically scale an app up or down when app metrics, such as memory or CPU, reach a given threshold. 
 
-Developers can define custom actions and triggers in an App Automator manifest file. For more information about configuring App Automator for PCF, see [Configuring App Automator for PCF](./using.html).
+Developers can define custom actions and triggers in a manifest file. For more information about configuring App Automator for PCF, see [Configuring App Automator for PCF](./using.html).
 
-## <a id='installing'></a> Download and Install App Automator for PCF
+## <a id='install'></a>Install App Automator for PCF
 
-Operators can install App Automator for PCF on one or more spaces in their PCF deployment. App Automator can be used to define triggers and actions for apps within the given space.
+Operators can install App Automator for PCF on one or more spaces in their PCF deployment. 
 
-To install App Automator for PCF, do the following:
+### Prerequisites
 
-  1. Download App Automator for PCF from PivNet. Run the following command to install the plugin on your deployment:
+The following are prerequisites for installing App Automator for PCF:
+
+  - Download App Automator for PCF from PivNet.
+  - App Automator for PCF requires Pivotal Application Service (PAS) 2.2 or later.
+
+### Install App Automator for PCF
+
+To install App Automator for PCF, navigate to the desired space in your PCF deployment, and run the following command:
 
 	```
   	cf install-plugin PATH-TO-PLUGIN
@@ -27,16 +34,39 @@ To install App Automator for PCF, do the following:
 
   	Where `PATH-TO-PLUGIN` is the path to the App Automator plugin on your local machine.
 
-  1. Navigate to the desired space in your PCF deployment. Run the following command to install App Automator on the space:
+## <a id='user-credentials'></a> Configure App Automator for PCF User Credentials
 
-	```
-	cf install-app-automator -p PASSWORD
-	``` 
+App Automator for PCF requires credentials for a Space Developer user on each space on which it is installed. To configure these user credentials, operators can do one of the following for each space on which App Automator for PCF is installed:
 
-	Where `PASSWORD` is a space-wide password for accessing App Automator. 
+- Create a new Space Developer user for App Automator for PCF. For more information, see [Create a User for New App Automator for PCF](#new-user) below.
 
-## <a id='accessing'></a> Access App Automator for PCF
+- Configure an existing Space Developer user for App Automator for PCF. See [Configure an Existing User for App Automator for PCF](#existing-user) below.
 
-Installing App Automator on a space creates space-wide user credentials. The username is `pvtl_appauto_SPACE_GUID`, where `SPACE_GUID` is the GUID of the space where App Automator is installed. The operator defines the password as part of the command for installing App Automator.
+### <a id='new-user'></a> Create a New User for App Automator for PCF 
 
-Users are prompted for App Automator login credentials To access App Automator for PCF via the cf CLI, enter the App Automator login credentials for the given space. 
+To create a new user with Space Developer permissions for App Automator for PCF, navigate to the desired space in your PCF deployment and run the following command:
+
+<pre class="terminal">cf install-app-automator -p MY-PASSWORD</pre>
+
+Where `MY-PASSWORD` is a space-wide password. 
+
+The command automatically generates a username for the new user. The username is `pvtl_appauto_SPACE_GUID`, where `SPACE_GUID` is the GUID of the space where App Automator for PCF is installed.
+
+### <a id='existing-user'></a> Configure an Existing User for App Automator for PCF
+
+Operators can configure existing user credentials on a space to use for App Automator for PCF by manually creating an App Automator for PCF credentials
+
+To configure an existing user with Space Developer permissions for App Automator for PCF, do the following:
+
+1. Navigate to the desired space in your PCF deployment and run the following command to install App Automator for PCF:
+
+	<pre class="terminal">cf install-app-automator</pre>
+
+1. Run the following command to configure a user for App Automator for PCF 
+
+	<pre class="terminal">cf create-user-provided-service pvtl-app-automator-credentials\
+	-p '{"username":"MY-USERNAME", "password": "MY-PASSWORD"}'</pre>
+
+	Where:
+	* `MY-PASSWORD` is a space-wide username for the App Automator user.
+	* `MY-PASSWORD` is a space-wide password for the App Automator user.
