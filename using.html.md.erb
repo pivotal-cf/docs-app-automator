@@ -58,12 +58,19 @@ To configure existing user credentials for App Automator for PCF, do the followi
 
 ## <a id='configure-manifest'></a> Configure the App Automator for PCF Manifest File
 
-This section describes the format of the App Automator for PCF manifest file, the syntax for actions and triggers within the manufest file, and the procedure for configuring App Automator for PCF after creating the manifest file. 
+This section describes the format and syntax for App Automator for PCF manifest files. It also explains how to configure App Automator for PCF after creating one or more manifest files. 
+
+The following are the components of an App Automator for PCF manifest file:
+
+* **Triggers**: When the conditions of a trigger are met, App Automator for PCF executes an action. For more information, see [About App Automator for PCF Triggers](#triggers).
+
+* **Actions**: App Automator for PCF executes actions, such as scaling an app to a specific number of instances, based on an associated trigger. For more information, see [About App Automator for PCF Actions](#actions).
+
+* **Scope**: Scope is an optional label that defines the app or group of apps within the PCF deployment space to which the manifest file applies. For more information, see [About App Automator for PCF Scope](#scope).
 
 ### <a id='triggers'></a> About App Automator for PCF Triggers
 
-The following are the parameters of App Automator for PCF triggers:
-
+This section describes the types of App Automator for PCF triggers as well as the YAML formatting for each trigger type.
 
 The following are the types of App Automator for PCF triggers:
 
@@ -93,7 +100,7 @@ Where:
 
 This section describes the types of App Automator for PCF actions as well as the YAML formatting for each action type.
 
-The following are App Automator for PCF actions:
+The following are the types of App Automator for PCF actions:
 
 - `scale_to`: Scale an app up or down to a specific number of intances. For more information, see [Example scale_to Action](#scale_to).
 - `scale_by`: Scale an app up or down by a specific number of intances. For more information, see [Example scale_by Action](#scale_by).
@@ -118,7 +125,7 @@ Where:
 * `my-scale-to-action` is a name for the action. 
 * `app` is a required parameter that lists the name of the app against which App Automator for PCF executes the action. For example, `my-app`.
 * `type` is a required parameter that defines the type of action. The possible values for `type` are `scale_to`, `scale_by`, and `cf_task`.
-* `instances` is a required parameter that defines the number of instances to which App Automator scales the app. The value for the `instances` parameter can be any positive integer.
+* `instances` is a required parameter that defines the number of instances to which App Automator for PCF scales the app. The value for the `instances` parameter can be any positive integer.
 
 #### <a id="scale_by"></a> Example scale_by Action
 
@@ -168,7 +175,7 @@ Where:
 * `memory_in_mb` is an optional parameter that defines the memory for the app in MB.
 * `disk_quota_in_mb` is an optional parameter that defines the disk quota for the app in MB.  
 
-### <a id='triggers'></a> About App Automator for PCF Scope
+### <a id="scope"></a> About App Automator for PCF Scope
 
 Scope is an optional label that can be applied in an App Automator for PCF manifest file. Scope defines the app or group of apps to which the triggers and actions defined in the file apply.
 
