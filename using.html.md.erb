@@ -5,80 +5,31 @@ owner: CF EATs
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to configure user credentials for accessing App Automator for Pivotal Cloud Foundry (PCF). It also describes how to define and configure triggers and actions in an App Automator for PCF manifest file.
-
-## <a id='user-credentials'></a> Configure App Automator for PCF User Credentials
-
-App Automator for PCF requires Space Developer user credentials on each PCF deployment space on which it is installed. Pivotal recommends configuring unique credentials for each space.  
-
-For more information about assigning Space Developer permissions to a user in PCF, see [Orgs, Spaces, Roles, and Permissions](https://docs.pivotal.io/pivotalcf/concepts/roles.html). 
-
-To configure space-wide user credentials for App Automator for PCF, do one of the following:
-
-- Create new user credentials. For more information, see [Create New User Credentials](#new-user).
-
-- Configure existing user credentials. For more information, see [Configure Existing User Credentials](#existing-user).
-
-### <a id='new-user'></a> Create New User Credentials
-
-This section describes how to create new user credentials for App Automator for PCF. 
-
-To create new user credentials, do the following:
-
-1. Navigate to the PCF deployment space on which you want to install App Automator for PCF.
-1. Run the following command to generate a new user:
-
-    <pre class="terminal">cf install-app-automator -p MY-PASSWORD</pre>
-
-    Where `MY-PASSWORD` is a password for the new App Automator for PCF user.
-    </br>
-    </br>
-    The username for the new user is `pvtl_appauto_SPACE_GUID`, where `SPACE_GUID` is the GUID of the space. 
-
-### <a id='existing-user'></a> Configure Existing User Credentials
-
-This section describes how to use an existing user with Space Developer permissions for App Automator for PCF by saving the desired user credentials in a user-provided service. 
-
-For more information about user-provided services, see [User-Provided Service](https://docs.pivotal.io/tiledev/user-provided.html).
-
-To configure existing user credentials for App Automator for PCF, do the following:
-
-1. Navigate to the desired space in your PCF deployment and run the following command to install App Automator for PCF:
-
-    <pre class="terminal">cf install-app-automator</pre>
-
-1. Run the following command to add the existing user credentials to a user-provided service called `pvtl-app-automator-credentials`: 
-
-    <pre class="terminal">cf create-user-provided-service pvtl-app-automator-credentials\
-    -p '{"username":"MY-USERNAME", "password": "MY-PASSWORD"}'</pre>
-
-    Where:
-    * `MY-USERNAME` is the username for the space-wide Space Developer user.
-    * `MY-PASSWORD` is the password for the space-wide Space Developer user.
+This topic describes how to configure how to define and configure triggers and actions in an App Automator for Pivotal Cloud Foundry (PCF) manifest file.
 
 ## <a id='configure-manifest'></a> Configure the App Automator for PCF Manifest File
 
-This section describes the format and syntax for App Automator for PCF manifest files. It also explains how to configure App Automator for PCF after creating one or more manifest files. 
+This section describes the format and syntax for App Automator manifest files. It also explains how to configure App Automator after creating one or more manifest files. 
 
-The following are the components of an App Automator for PCF manifest file:
+The following are the components of an App Automator manifest file:
 
-* **Triggers**: When the conditions of a trigger are met, App Automator for PCF executes an action. For more information, see [About App Automator for PCF Triggers](#triggers).
+* **Triggers**: When the conditions of a trigger are met, App Automator executes an action. For more information, see [About App Automator for PCF Triggers](#triggers).
 
-* **Actions**: App Automator for PCF executes actions, such as scaling an app to a specific number of instances, based on an associated trigger. For more information, see [About App Automator for PCF Actions](#actions).
+* **Actions**: App Automator executes actions, such as scaling an app to a specific number of instances, based on an associated trigger. For more information, see [About App Automator for PCF Actions](#actions).
 
-* **Scope**: Scope is an optional label that defines the app or group of apps within the PCF deployment space to which the manifest file applies. For more information, see [About App Automator for PCF Scope](#scope).
+* **Scope**: Scope is an optional label that defines the app or group of apps to which the manifest file applies. For more information, see [About App Automator for PCF Scope](#scope).
 
 ### <a id='triggers'></a> About App Automator for PCF Triggers
 
-This section describes the types of App Automator for PCF triggers as well as the YAML formatting for each trigger type.
+This section describes the types of App Automator triggers as well as the YAML formatting for each trigger type.
 
-The following are the types of App Automator for PCF triggers:
+The following are the types of App Automator triggers:
 
-- `schedule`: Set a regular schedule for App Automator for PCF to execute an action against an app. For more information, see [Example schedule Trigger](#schedule).
+- `schedule`: Set a regular schedule for App Automator to execute an action against an app. For more information, see [Example schedule Trigger](#schedule).
 
 #### <a id="schedule"></a> Example schedule Trigger
 
-`schedule` triggers set a regular schedule for App Automator for PCF to execute an action against an app.
+`schedule` triggers set a regular schedule for App Automator to execute an action against an app.
 
 The following is an example of a `schedule` trigger that initiates an action `my-action` every three minutes.
 
@@ -93,14 +44,14 @@ Where:
 
 * `my-schedule-trigger` is a name for the trigger. 
 * `type` is a required parameter that defines the type of trigger. The value for the `type` parameter of a trigger is always `schedule`.
-* `action`: Is a required parameter that defines the action App Automator for PCF executes when the conditions of the trigger are met.
-* `expression` is a required parameter that defines when App Automator for PCF executes the defined `action`. The syntax for the `expression` parameter is a cron expression.
+* `action`: Is a required parameter that defines the action App Automator executes when the conditions of the trigger are met.
+* `expression` is a required parameter that defines when App Automator executes the defined `action`. The syntax for the `expression` parameter is a cron expression.
  
 ### <a id='actions'></a> About App Automator for PCF Actions
 
-This section describes the types of App Automator for PCF actions as well as the YAML formatting for each action type.
+This section describes the types of App Automator actions as well as the YAML formatting for each action type.
 
-The following are the types of App Automator for PCF actions:
+The following are the types of App Automator actions:
 
 - `scale_to`: Scale an app up or down to a specific number of intances. For more information, see [Example scale_to Action](#scale_to).
 - `scale_by`: Scale an app up or down by a specific number of intances. For more information, see [Example scale_by Action](#scale_by).
@@ -123,9 +74,9 @@ The following is an example of a `scale_to` action that automatically scales an 
 Where:
 
 * `my-scale-to-action` is a name for the action. 
-* `app` is a required parameter that lists the name of the app against which App Automator for PCF executes the action. For example, `my-app`.
+* `app` is a required parameter that lists the name of the app against which App Automator executes the action. For example, `my-app`.
 * `type` is a required parameter that defines the type of action. The possible values for `type` are `scale_to`, `scale_by`, and `cf_task`.
-* `instances` is a required parameter that defines the number of instances to which App Automator for PCF scales the app. The value for the `instances` parameter can be any positive integer.
+* `instances` is a required parameter that defines the number of instances to which App Automator scales the app. The value for the `instances` parameter can be any positive integer.
 
 #### <a id="scale_by"></a> Example scale_by Action
 
@@ -146,7 +97,7 @@ The following is an example of a `scale_by` action that automatically scales an 
 Where:
 
 * `my-scale-by-action` is a name for the action. 
-* `app` is a required parameter that lists the name of the app against which App Automator for PCF executes the action. For example, `my-app`.
+* `app` is a required parameter that lists the name of the app against which App Automator executes the action. For example, `my-app`.
 * `type` is a required parameter that defines the type of action. The possible values for `type` are `scale_to`, `scale_by`, and `cf_task`.
 * `factor` is a required parameter that defines the number of instances by which App Automator scales up the app. The value for the `instances` parameter can be any positive or negative, non-zero integer.
 * `max` is an optional parameter that sets a maximum number of app instances.
@@ -169,7 +120,7 @@ Where:
 Where:
 
 * `my-cf-task-action` is a name for the action. 
-* `app` is a required parameter that lists the name of the app against which App Automator for PCF executes the action. For example, `my-app`.
+* `app` is a required parameter that lists the name of the app against which App Automator executes the action. For example, `my-app`.
 * `type` is a required parameter that defines the type of action. The possible values for `type` are `scale_to`, `scale_by`, and `cf_task`.
 * `command` is a required parameter that defines a `cf_task` command to execute.
 * `memory_in_mb` is an optional parameter that defines the memory for the app in MB.
@@ -177,7 +128,7 @@ Where:
 
 ### <a id="scope"></a> About App Automator for PCF Scope
 
-Scope is an optional label that can be applied in an App Automator for PCF manifest file. Scope defines the app or group of apps to which the triggers and actions defined in the file apply.
+Scope is an optional label that can be applied in an App Automator manifest file. Scope defines the app or group of apps to which the triggers and actions defined in the manifest file apply.
 
 Scope allows developers to create multiple manifest files within a single PCF deployment space, and to reuse triggers and actions across manifest files.
 
@@ -209,7 +160,7 @@ triggers:
 
 ### <a id='example'></a> Example Manifest File 
 
-The example YAML file below executes a `scale_by` action every 15 minutes. The action scales the app down by 2 instances. The action also defines the minimum number of instances to which App Automator for PCF can scale the app is one instance.
+The example YAML file below executes a `scale_by` action every 15 minutes. The action scales the app down by 2 instances. The action also defines that the minimum number of instances to which App Automator can scale the app is one instance.
 
 <pre>
 actions:
@@ -234,7 +185,7 @@ Where:
 
 ### <a id='apply'></a> Apply Changes to the Manifest File
 
-To configure App Automator for PCF with the triggers and actions defined in the manifest file, run the following command:
+To configure App Automator with the triggers and actions defined in the manifest file, run the following command:
 
 <pre class="terminal">cf configure-app-automator manifest-file</pre>
 
