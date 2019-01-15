@@ -26,9 +26,9 @@ The following section describes how to install the App Automator for PCF plugin.
 
 To install the App Automator for PCF plugin, run the following command in the cf CLI:
 
-	<pre class="terminal">cf install-plugin PATH-TO-PLUGIN</pre>
+<pre class="terminal">cf install-plugin PATH-TO-PLUGIN</pre>
 
-  	Where `PATH-TO-PLUGIN` is the path to the App Automator for PCF plugin you downloaded.
+Where `PATH-TO-PLUGIN` is the path to the App Automator for PCF plugin you downloaded.
 
 ## <a id='user-credentials'></a> Configure App Automator for PCF User Credentials
 
@@ -49,14 +49,14 @@ This section describes how to create new user credentials for App Automator.
 To create new user credentials, do the following:
 
 1. Navigate to the PCF deployment space on which you want to install App Automator.
-1. Run the following command to generate a new user:
+1. Run the following command to install App Automator on the space and generate a new user:
 
     <pre class="terminal">cf install-app-automator -p MY-PASSWORD</pre>
 
     Where `MY-PASSWORD` is a password for the new App Automator user.
     </br>
     </br>
-    The automatically-generated username for the user is `pvtl_appauto_SPACE_GUID`, where `SPACE_GUID` is the GUID of the space. 
+    App Automator generates a username for the user and saves the credentials as a user-provided service called `pvtl-app-automator-credentials`. The username is `pvtl_appauto_SPACE_GUID`, where `SPACE_GUID` is the GUID of the space. 
 
 ### <a id='existing-user'></a> Configure Existing User Credentials
 
@@ -76,5 +76,5 @@ To configure existing user credentials for App Automator, do the following:
     -p '{"username":"MY-USERNAME", "password": "MY-PASSWORD"}'</pre>
 
     Where:
-    * `MY-USERNAME` is the username for the space-wide Space Developer user.
-    * `MY-PASSWORD` is the password for the space-wide Space Developer user.
+    * `MY-USERNAME` is the username for the Space Developer user.
+    * `MY-PASSWORD` is the password for the Space Developer user.
