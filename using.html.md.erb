@@ -5,7 +5,7 @@ owner: CF EATs
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to configure how to define and configure triggers and actions in an App Automator for Pivotal Cloud Foundry (PCF) manifest file.
+This topic describes how to configure how to define and configure triggers, actions, and scope in an App Automator for Pivotal Cloud Foundry (PCF) manifest file.
 
 ## <a id='configure-manifest'></a> Configure the App Automator for PCF Manifest File
 
@@ -17,7 +17,7 @@ The following are the components of an App Automator manifest file:
 
 * **Actions**: App Automator executes actions, such as scaling an app to a specific number of instances, based on an associated trigger. For more information, see [About App Automator for PCF Actions](#actions).
 
-* **Scope**: Scope is an optional label that defines the app or group of apps to which the manifest file applies. For more information, see [About App Automator for PCF Scope](#scope).
+* **Scope**: Scope defines the app or group of apps to which the manifest file applies. For more information, see [About App Automator for PCF Scope](#scope).
 
 ### <a id='triggers'></a> About App Automator for PCF Triggers
 
@@ -128,14 +128,12 @@ Where:
 
 ### <a id="scope"></a> About App Automator for PCF Scope
 
-Scope is an optional label that can be defined in an App Automator manifest file. Scope defines the app or group of apps to which the triggers and actions defined in the manifest file apply.
+Scope is a required field that defines the app or group of apps to which the triggers and actions in the manifest file apply. This allows developers to apply triggers and actions to specific groups of apps within a PCF deployment space. 
 
-Scope allows developers to create multiple manifest files within a single PCF deployment space.
-
-In the example below, the manifest file defines a scope label `data-apps`. The apps `my-first-app` and my `my-second-app` are within the `data-apps` scope.
+For example, in the manifest file below, the apps `my-first-app` and my `my-second-app` are apps in a service. The scope `my-service` applies the trigger and action defined in the file to `my-first-app` and `my-second-app`, rather than to all apps in the space on which App Automator is installed.
 
 <pre>
-scope: data-apps
+scope: my-service
 
 actions:
  scale-by-action:
@@ -160,9 +158,11 @@ triggers:
 
 ### <a id='example'></a> Example Manifest File 
 
-The example YAML file below executes a `scale_by` action every 15 minutes. The action scales the app down by 2 instances. The action also defines that the minimum number of instances to which App Automator can scale the app is one instance.
+The example YAML file below executes a `scale_by` action every 15 minutes on the app `my-app`. The action scales the app down by 2 instances. The action also defines that the minimum number of instances to which App Automator can scale the app is one instance. In this example, the scope of the manifest file is a single app, `my-app`.  
 
 <pre>
+scope: my-app
+
 actions:
  scale-by-action:
     app: my-app
