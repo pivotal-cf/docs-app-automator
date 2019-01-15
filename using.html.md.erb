@@ -7,13 +7,13 @@ owner: CF EATs
 
 This topic describes how to configure how to define and configure triggers, actions, and scope in an App Automator for Pivotal Cloud Foundry (PCF) manifest file.
 
-## <a id='configure-manifest'></a> Configure the App Automator for PCF Manifest File
+## <a id='configure-manifest'></a> Configure an App Automator for PCF Manifest File
 
-This section describes the format and syntax for App Automator manifest files. It also explains how to configure App Automator after creating one or more manifest files. 
+This section describes the format and syntax for triggers, actions, and scope in App Automator manifest files.
 
 The following are the components of an App Automator manifest file:
 
-* **Triggers**: When the conditions of a trigger are met, App Automator executes an action. For more information, see [About App Automator for PCF Triggers](#triggers).
+* **Triggers**: When the conditions of a trigger are met, App Automator executes an associated action. For more information, see [About App Automator for PCF Triggers](#triggers).
 
 * **Actions**: App Automator executes actions, such as scaling an app to a specific number of instances, based on an associated trigger. For more information, see [About App Automator for PCF Actions](#actions).
 
@@ -55,7 +55,7 @@ The following are the types of App Automator actions:
 
 - `scale_to`: Scale an app up or down to a specific number of intances. For more information, see [Example scale_to Action](#scale_to).
 - `scale_by`: Scale an app up or down by a specific number of intances. For more information, see [Example scale_by Action](#scale_by).
-- `cf_task`: Executes a `cf_task` against an app. For more information, see [Example cf_task Action](#cf_task).
+- `cf_task`: Executes a `cf_task`. For more information, see [Example cf_task Action](#cf_task).
 
 #### <a id='scale_to'></a> Example scale_to Action
 
@@ -105,7 +105,7 @@ Where:
 
 #### <a id="cf_task"></a> Example cf_task Action
 
-`cf_task` actions execute a `cf_task` against an app. They can also optionally set app memory and disk quota.
+`cf_task` actions execute a `cf_task` on an app. They can also optionally set app memory and disk quota.
 
 <pre>
  my-cf-task-action:
@@ -120,11 +120,11 @@ Where:
 Where:
 
 * `my-cf-task-action` is a name for the action. 
-* `app` is a required parameter that lists the name of the app against which App Automator executes the action. For example, `my-app`.
+* `app` is a required parameter that lists the name of the app on which App Automator runs the command.
 * `type` is a required parameter that defines the type of action. The possible values for `type` are `scale_to`, `scale_by`, and `cf_task`.
 * `command` is a required parameter that defines a `cf_task` command to execute.
-* `memory_in_mb` is an optional parameter that defines the memory for the app in MB.
-* `disk_quota_in_mb` is an optional parameter that defines the disk quota for the app in MB.  
+* `memory_in_mb` is an optional parameter that sets the memory for the in MB for the app listed in the `app` parameter.
+* `disk_quota_in_mb` is an optional parameter that defines the disk quota in MB for the app listed in the `app` parameter.  
 
 ### <a id="scope"></a> About App Automator for PCF Scope
 
