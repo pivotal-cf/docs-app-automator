@@ -93,15 +93,17 @@ The following is an example of a `scale_by` action that automatically scales an 
 Where:
 
 * `my-scale-by-action` is a name for the action. 
-* `app` is a required parameter that lists the name of the app against which App Automator executes the action. For example, `my-app`.
-* `type` is a required parameter that defines the type of action. The possible values for `type` are `scale_to`, `scale_by`, and `cf_task`.
-* `factor` is a required parameter that defines the number of instances by which App Automator scales up the app. The value for the `instances` parameter can be any positive or negative, non-zero integer.
+* `app` is a required parameter that lists the name of the app that App Automator scales.
+* `type` is a required parameter that defines the type of action.
+* `factor` is a required parameter that defines the number of instances by which App Automator scales the app. The value for the `instances` parameter can be any positive or negative, non-zero integer.
 * `max` is an optional parameter that sets a maximum number of app instances.
 * `min` is an optional parameter that sets a minimum number of app instances.
 
 ### <a id="cf_task"></a> Example cf_task Action
 
-`cf_task` actions execute a `cf_task` on an app. They can also optionally set app memory and disk quota.
+`cf_task` actions run a Cloud Foundry task. Optionally, they also set app memory and disk quota.
+
+For more information about running tasks in Cloud Foundry, see [Running Tasks](https://docs.pivotal.io/pivotalcf/2-4/devguide/using-tasks.html). 
 
 <pre>
  my-cf-task-action:
@@ -117,10 +119,10 @@ Where:
 
 * `my-cf-task-action` is a name for the action. 
 * `app` is a required parameter that lists the name of the app on which App Automator runs the command.
-* `type` is a required parameter that defines the type of action. The possible values for `type` are `scale_to`, `scale_by`, and `cf_task`.
-* `command` is a required parameter that defines a `cf_task` command to execute.
-* `memory_in_mb` is an optional parameter that sets the memory for the in MB for the app listed in the `app` parameter.
-* `disk_quota_in_mb` is an optional parameter that defines the disk quota in MB for the app listed in the `app` parameter.  
+* `type` is a required parameter that defines the type of action.
+* `command` is a required parameter that lists the `cf_task` command that App Automator runs.
+* `memory_in_mb` is an optional parameter that sets the memory in MB for the app listed in the `app` parameter.
+* `disk_quota_in_mb` is an optional parameter that sets the disk quota in MB for the app listed in the `app` parameter.  
 
 ## <a id="scope"></a> About App Automator for PCF Scope
 
@@ -152,12 +154,16 @@ triggers:
    expression: "@every 15m"
 </pre>
 
+<p class="note"><b>Note</b>: Each App Automator manifest file can have a single scope. To create more than one scope within a space, add additional manifest files.</p>
+
 ## <a id='example'></a> Example Manifest File 
 
-The example App Automator manifest file below executes a `scale_by` action every 15 minutes on the app `my-app`. The action scales the app down by 2 instances. The action also defines that the minimum number of instances to which App Automator can scale the app is one instance. In this example, the scope of the manifest file is a single app, `my-app`.  
+The example App Automator manifest file below executes a `scale_by` action every 15 minutes on the app, `my-app`. The action scales the app down by 2 instances. The action also defines that the minimum number of instances to which App Automator can scale `my-app` is one instance. 
+
+In this example, `my-app` is the only app included in the scope of the manifest file. To illustrate this, the label for scope is `one-app`.
 
 <pre>
-scope: my-app
+scope: one-app
 
 actions:
  scale-by-action:
@@ -172,19 +178,14 @@ triggers:
    type: schedule
    action: scale-by-action
    expression: "@every 15m"
-</pre>
+</pre> 
 
-Where:
+## <a id='apply'></a> Configure App Automator with a Manifest File
 
-- `my-app` is the name of the app against which App Automator executes the action.
-- `scale-by-action` is the name of the action.  
+After creating a manifest file, configure App Automator to apply the triggers, actions, and scope defined in the manifest file.
 
-## <a id='apply'></a> Apply Changes to the Manifest File
-
-To configure App Automator with the triggers and actions defined in the manifest file, run the following command:
+To configure App Automator with a manifest file, run the following command:
 
 <pre class="terminal">cf configure-app-automator manifest-file</pre>
 
-Where:
-
-  - `manifest-file` is the name of the App Automator manifest YAML file.
+Where `manifest-file` is the name of the App Automator manifest YAML file.
