@@ -128,7 +128,7 @@ Where:
 
 ### <a id="scope"></a> About App Automator for PCF Scope
 
-Scope is a required field that defines the app or group of apps to which the triggers and actions in the manifest file apply. This allows developers to apply triggers and actions to specific groups of apps within a PCF deployment space. 
+Scope is a required field that defines the app or group of apps to which the App Automator manifest file applies. This allows developers to apply triggers and actions to specific groups of apps within a PCF deployment space. 
 
 For example, in the manifest file below, the apps `my-first-app` and my `my-second-app` are apps in a service. The scope `my-service` applies the trigger and action defined in the file to `my-first-app` and `my-second-app`, rather than to all apps in the space on which App Automator is installed.
 
@@ -158,7 +158,7 @@ triggers:
 
 ### <a id='example'></a> Example Manifest File 
 
-The example YAML file below executes a `scale_by` action every 15 minutes on the app `my-app`. The action scales the app down by 2 instances. The action also defines that the minimum number of instances to which App Automator can scale the app is one instance. In this example, the scope of the manifest file is a single app, `my-app`.  
+The example App Automator manifest file below executes a `scale_by` action every 15 minutes on the app `my-app`. The action scales the app down by 2 instances. The action also defines that the minimum number of instances to which App Automator can scale the app is one instance. In this example, the scope of the manifest file is a single app, `my-app`.  
 
 <pre>
 scope: my-app
