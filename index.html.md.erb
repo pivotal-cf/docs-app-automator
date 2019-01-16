@@ -50,12 +50,12 @@ This section describes how to create new user credentials for App Automator.
 
 To create new user credentials, navigate to the desired PCF deployment space and run the following command:
 
-    <pre class="terminal">cf install-app-automator -p MY-PASSWORD</pre>
+<pre class="terminal">cf install-app-automator -p MY-PASSWORD</pre>
 
-    Where `MY-PASSWORD` is a password for the new App Automator user.
-    </br>
-    </br>
-    App Automator generates a username for the user and saves the credentials as a user-provided service called `pvtl-app-automator-credentials`. The username is `pvtl_appauto_SPACE_GUID`, where `SPACE_GUID` is the GUID of the space. 
+Where `MY-PASSWORD` is a password for the new App Automator user.
+</br>
+</br>
+App Automator generates a username for the user and saves the credentials as a user-provided service called `pvtl-app-automator-credentials`. The username is `pvtl_appauto_SPACE_GUID`, where `SPACE_GUID` is the GUID of the space. 
 
 ### <a id='existing-user'></a> Configure Existing User Credentials
 
@@ -65,9 +65,10 @@ For more information about user-provided services, see [User-Provided Service](h
 
 To configure existing user credentials for App Automator, navigate to the desired space in your PCF deployment and run the following command: 
 
-    <pre class="terminal">cf create-user-provided-service pvtl-app-automator-credentials\
-    -p '{"username":"MY-USERNAME", "password": "MY-PASSWORD"}'</pre>
+<pre class="terminal">cf create-user-provided-service pvtl-app-automator-credentials\
+-p '{"username":"MY-USERNAME", "password": "MY-PASSWORD"}'</pre>
 
-    Where:
-    * `MY-USERNAME` is the username for the Space Developer user.
-    * `MY-PASSWORD` is the password for the Space Developer user.
+Where:
+
+* `MY-USERNAME` is the username for the Space Developer user.
+* `MY-PASSWORD` is the password for the Space Developer user.
