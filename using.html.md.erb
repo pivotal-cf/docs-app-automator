@@ -5,6 +5,8 @@ owner: CF EATs
 
 <strong><%= modified_date %></strong>
 
+<p class="note warning"><b>Warning</b>: App Automator v1.0 is Beta. Do not use App Automator v1.0 in a production environment.</p>
+
 This topic describes how to define and configure triggers, actions, and scope in an App Automator for Pivotal Cloud Foundry (PCF) manifest file.
 
 The following are the components of an App Automator manifest file:
@@ -41,7 +43,7 @@ Where:
 * `my-schedule-trigger` is a name for the trigger. 
 * `type` is a required parameter that defines the type of trigger. The value for the `type` parameter of a trigger is always `schedule`.
 * `action`: Is a required parameter that defines the action App Automator executes when the conditions of the trigger are met.
-* `expression` is a required parameter that defines when App Automator executes the defined `action`. The syntax for the `expression` parameter is a cron expression.
+* `expression` is a required parameter that defines the schedule for App Automator to execute the defined `action`. The syntax for the `expression` parameter is a cron expression. For details about cron expression formatting, see [Package cron](https://godoc.org/github.com/robfig/cron).
  
 ## <a id='actions'></a> About App Automator for PCF Actions
 
@@ -49,13 +51,13 @@ This section describes the types of App Automator actions as well as the YAML fo
 
 The following are the types of App Automator actions:
 
-- `scale_to`: Scale an app up or down to a specific number of intances. For more information, see [Example scale_to Action](#scale_to).
-- `scale_by`: Scale an app up or down by a specific number of intances. For more information, see [Example scale_by Action](#scale_by).
-- `cf_task`: Executes a `cf_task`. For more information, see [Example cf_task Action](#cf_task).
+- `scale_to`: Scale an app up or down to a specific number of instances. For more information, see [Example scale_to Action](#scale_to).
+- `scale_by`: Scale an app up or down by a specific number of instances. For more information, see [Example scale_by Action](#scale_by).
+- `cf_task`: Runs a `cf_task` against an app. For more information, see [Example cf_task Action](#cf_task).
 
 ### <a id='scale_to'></a> Example scale_to Action
 
-`scale_to` actions scale an app up or down to a specific number of intances.
+`scale_to` actions scale an app up or down to a specific number of instances.
 
 The following is an example of a `scale_to` action that automatically scales an app up or down to eight instances.
 
@@ -70,8 +72,8 @@ The following is an example of a `scale_to` action that automatically scales an 
 Where:
 
 * `my-scale-to-action` is a name for the action. 
-* `app` is a required parameter that lists the name of the app against which App Automator executes the action. For example, `my-app`.
-* `type` is a required parameter that defines the type of action. The possible values for `type` are `scale_to`, `scale_by`, and `cf_task`.
+* `app` is a required parameter that lists the name of the app that App Automator scales.
+* `type` is a required parameter that defines the action type.
 * `instances` is a required parameter that defines the number of instances to which App Automator scales the app. The value for the `instances` parameter can be any positive integer.
 
 ### <a id="scale_by"></a> Example scale_by Action
@@ -94,16 +96,20 @@ Where:
 
 * `my-scale-by-action` is a name for the action. 
 * `app` is a required parameter that lists the name of the app that App Automator scales.
-* `type` is a required parameter that defines the type of action.
+* `type` is a required parameter that defines the action type.
 * `factor` is a required parameter that defines the number of instances by which App Automator scales the app. The value for the `factor` parameter can be any positive or negative, non-zero integer.
 * `max` is an optional parameter that sets a maximum number of app instances.
 * `min` is an optional parameter that sets a minimum number of app instances.
 
 ### <a id="cf_task"></a> Example cf_task Action
 
-`cf_task` actions run a Cloud Foundry task. Optionally, they also set app memory and disk quota.
+`cf_task` actions run a Cloud Foundry task against an app. For example, a `cf_task` action can run a script that returns the total number of new users for an app. 
 
-For more information about running tasks in Cloud Foundry, see [Running Tasks](https://docs.pivotal.io/pivotalcf/2-4/devguide/using-tasks.html). 
+`cf_task` actions create a container in which to run the task. Developers can set the memory and disk quota for this container as part of the definition for the `cf_task` action.
+
+For more information about Cloud Foundry tasks, see [Running Tasks](https://docs.pivotal.io/pivotalcf/2-4/devguide/using-tasks.html). 
+
+The following is an example `cf_task` action that runs a task aginst an app. The action runs the task on a container with a memory of 4 MB and a disk quota of 8 MB.
 
 <pre>
  my-cf-task-action:
@@ -121,12 +127,12 @@ Where:
 * `app` is a required parameter that lists the name of the app on which App Automator runs the command.
 * `type` is a required parameter that defines the type of action.
 * `command` is a required parameter that lists the `cf_task` command that App Automator runs.
-* `memory_in_mb` is an optional parameter that sets the memory in MB for the app listed in the `app` parameter.
-* `disk_quota_in_mb` is an optional parameter that sets the disk quota in MB for the app listed in the `app` parameter.  
+* `memory_in_mb` is an optional parameter that sets the memory in MB for the container on which App Automator runs the task.
+* `disk_quota_in_mb` is an optional parameter that sets the disk quota in MB for the container on which App Automator runs the task.  
 
 ## <a id="scope"></a> About App Automator for PCF Scope
 
-Scope is a required field that defines the app or group of apps to which the App Automator manifest file applies. This allows developers to apply triggers and actions to specific groups of apps within a PCF deployment space. 
+Scope is a required field that defines the app or group of apps to which the App Automator manifest file applies. This allows developers to apply triggers and actions to one or more groups of apps within a PCF deployment space. 
 
 For example, in the manifest file below, the apps `my-first-app` and my `my-second-app` are apps in a service. The scope `my-service` applies the trigger and action defined in the file to `my-first-app` and `my-second-app`, rather than to all apps in the space on which App Automator is installed.
 
