@@ -5,6 +5,8 @@ owner: CF EATs
 
 <strong><%= modified_date %></strong>
 
+<p class="note warning"><b>Warning</b>: App Automator v1.0 is Beta. Do not use App Automator v1.0 in a production environment.</p>
+
 This topic provides an introduction to App Automator for Pivotal Cloud Foundry (PCF) and describes how to install the App Automator for PCF plugin.
 
 ## <a id='about'></a> About App Automator for PCF
@@ -46,10 +48,7 @@ To configure space-wide user credentials for App Automator, do one of the follow
 
 This section describes how to create new user credentials for App Automator. 
 
-To create new user credentials, do the following:
-
-1. Navigate to the PCF deployment space on which you want to install App Automator.
-1. Run the following command to install App Automator on the space and generate a new user:
+To create new user credentials, navigate to the desired PCF deployment space and run the following command:
 
     <pre class="terminal">cf install-app-automator -p MY-PASSWORD</pre>
 
@@ -60,17 +59,11 @@ To create new user credentials, do the following:
 
 ### <a id='existing-user'></a> Configure Existing User Credentials
 
-This section describes how to use an existing user with Space Developer permissions for App Automator by saving the desired user credentials in a user-provided service. 
+This section describes how to use an existing user with Space Developer permissions for App Automator by saving the desired user credentials in a user-provided service called `pvtl-app-automator-credentials`.
 
 For more information about user-provided services, see [User-Provided Service](https://docs.pivotal.io/tiledev/user-provided.html).
 
-To configure existing user credentials for App Automator, do the following:
-
-1. Navigate to the desired space in your PCF deployment and run the following command to install App Automator:
-
-    <pre class="terminal">cf install-app-automator</pre>
-
-1. Run the following command to add the existing user credentials to a user-provided service called `pvtl-app-automator-credentials`: 
+To configure existing user credentials for App Automator, navigate to the desired space in your PCF deployment and run the following command: 
 
     <pre class="terminal">cf create-user-provided-service pvtl-app-automator-credentials\
     -p '{"username":"MY-USERNAME", "password": "MY-PASSWORD"}'</pre>
