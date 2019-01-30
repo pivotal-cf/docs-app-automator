@@ -5,7 +5,7 @@ owner: CF EATs
 
 <strong><%= modified_date %></strong>
 
-<p class="note warning"><b>Warning</b>: App Automator v1.0 is Beta. It is not intended for use in production environments. It is governed by the Beta Components section in the <a href="https://network.pivotal.io/legal_documents/pivotal_software_eula">Pivotal Software End User License Agreement</a>.</p>
+<p class="note warning"><b>Warning</b>: App Automator v1.0 is Beta. It is not intended for use in production environments. It is governed as a Beta Component as defined in the <a href="https://network.pivotal.io/legal_documents/pivotal_software_eula">Pivotal Software End User License Agreement</a>.</p>
 
 This topic provides an introduction to App Automator for Pivotal Cloud Foundry (PCF) and describes how to install the App Automator for PCF plugin.
 
@@ -13,7 +13,7 @@ This topic provides an introduction to App Automator for Pivotal Cloud Foundry (
 
 App Automator executes automated actions against apps based on triggers. For example, developers can define a schedule for App Automator to automatically scale an app up or down.
 
-Operators can install App Automator on one or more spaces in their PCF deployment. On each space, one or more App Automator manifest files define the triggers, actions, and scope for App Automator. For more information about App Automator manifest files, including information about triggers, actions, and scope, see [Configuring App Automator for PCF](./using.html). 
+Operators can use App Automator on one or more spaces in their PCF deployment. On each space, one or more App Automator manifest files define the triggers, actions, and scope for App Automator. For more information about App Automator manifest files, including information about triggers, actions, and scope, see [Configuring App Automator for PCF](./using.html). 
 
 ## Prerequisites
 
@@ -22,15 +22,17 @@ The following are prerequisites for installing the App Automator for PCF plugin:
   - Download the App Automator for PCF plugin from PivNet.
   - App Automator requires Pivotal Application Service (PAS) 2.2 or later. For more information about upgrading PAS, see [Upgrading PAS and Other Pivotal Cloud Foundry Products](https://docs.pivotal.io/pivotalcf/2-4/customizing/upgrading-products.html).
 
-## <a id='install'></a> Install the App Automator for PCF Plugin
+## <a id='install'></a> Install App Automator for PCF
 
-The following section describes how to install the App Automator for PCF plugin. After installing the plugin, operators can install App Automator on or more spaces in their PCF deployment.
+The following section describes how to install the App Automator for PCF plugin. After installing the plugin, operators can use App Automator on or more spaces in their PCF deployment.
 
 To install the App Automator for PCF plugin, run the following command in the cf CLI:
 
 <pre class="terminal">cf install-plugin PATH-TO-PLUGIN</pre>
 
 Where `PATH-TO-PLUGIN` is the path to the App Automator for PCF plugin you downloaded.
+
+For more information about cf CLI plugins, see [Using cf CLI Plugins](https://docs.pivotal.io/pivotalcf/cf-cli/use-cli-plugins.html).
 
 ## <a id='user-credentials'></a> Configure App Automator for PCF User Credentials
 
