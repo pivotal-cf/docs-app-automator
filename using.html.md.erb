@@ -5,13 +5,13 @@ owner: CF EATs
 
 <strong><%= modified_date %></strong>
 
-<p class="note warning"><b>Warning</b>: App Automator v1.0 is Beta. It is not intended for use in production environments. It is governed by the Beta Components section in the <a href="https://network.pivotal.io/legal_documents/pivotal_software_eula">Pivotal Software End User License Agreement</a>.</p>
+<p class="note warning"><b>Warning</b>: App Automator v1.0 is Beta. It is not intended for use in production environments. It is governed as a Beta Component as defined in the <a href="https://network.pivotal.io/legal_documents/pivotal_software_eula">Pivotal Software End User License Agreement</a>.</p>
 
-This topic describes how to define and configure triggers, actions, and scope in an App Automator for Pivotal Cloud Foundry (PCF) manifest file.
+This topic describes how to define and configure triggers, actions, and scope in one or more App Automator for Pivotal Cloud Foundry (PCF) manifest files. It also describes how to configure App Automator to use the triggers, actions, and scope defined in the manifest files.
 
 The following are the components of an App Automator manifest file:
 
-* **Triggers**: When the conditions of a trigger are met, App Automator executes an associated action. For more information, see [About App Automator for PCF Triggers](#triggers).
+* **Triggers**: Triggers define the schedule for App Automator to execute an associated action. For more information about `schedule` triggers, see [About App Automator for PCF Triggers](#triggers).
 
 * **Actions**: App Automator executes actions, such as scaling an app to a specific number of instances, based on an associated trigger. For more information, see [About App Automator for PCF Actions](#actions).
 
@@ -19,17 +19,11 @@ The following are the components of an App Automator manifest file:
 
 ## <a id='triggers'></a> About App Automator for PCF Triggers
 
-This section describes the types of App Automator triggers as well as the YAML formatting for each trigger type.
+This section describes the `schedule` App Automator trigger as well as its YAML formatting.
 
-The following are the types of App Automator triggers:
+The App Automator `schedule` trigger sets a regular schedule for App Automator to execute an action against an app.
 
-- `schedule`: Set a regular schedule for App Automator to execute an action against an app. For more information, see [Example schedule Trigger](#schedule).
-
-### <a id="schedule"></a> Example schedule Trigger
-
-`schedule` triggers set a regular schedule for App Automator to execute an action against an app.
-
-The following is an example of a `schedule` trigger that initiates an action `my-action` every three minutes.
+The following is an example of a `schedule` trigger that can appear in an App Automator manifest file. The example shows the YAML formatting of a `schedule` trigger that initiates an action `my-action` every three minutes.
 
 <pre>
   my-schedule-trigger:
@@ -59,7 +53,7 @@ The following are the types of App Automator actions:
 
 `scale_to` actions scale an app up or down to a specific number of instances.
 
-The following is an example of a `scale_to` action that automatically scales an app up or down to eight instances.
+The following is an example of a `scale_to` action that can appear in an App Automator manifest file. The example shows the YAML formatting of a `scale_to` action that automatically scales an app up or down to eight instances.
 
 <pre>
   my-scale-to-action:
@@ -80,7 +74,7 @@ Where:
 
 `scale_by` actions scale an app up or down by a specific number of instances.
 
-The following is an example of a `scale_by` action that automatically scales an app up by 2 instances.
+The following is an example of a `scale_by` action that can appear in an App Automator manifest file. The example shows the YAML formatting of a `scale_by` action that automatically scales an app up by 2 instances.
 
 <pre>
   my-scale-by-action:
@@ -109,7 +103,7 @@ Where:
 
 For more information about Cloud Foundry tasks, see [Running Tasks](https://docs.pivotal.io/pivotalcf/2-4/devguide/using-tasks.html). 
 
-The following is an example `cf_task` action that runs a task aginst an app. The action runs the task on a container with a memory of 4 MB and a disk quota of 8 MB.
+The following is an example of a `cf_task` action that can appear in an App Automator manifest file. The example shows the YAML formatting of a `cf_task` action that runs a task aginst an app. The action runs the task on a container with a memory of 4 MB and a disk quota of 8 MB.
 
 <pre>
  my-cf-task-action:
