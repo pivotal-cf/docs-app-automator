@@ -19,14 +19,14 @@ Operators can use App Automator on one or more spaces in their PCF deployment. O
 
 The following are prerequisites for installing the App Automator for PCF plugin:
 
-  - Download the App Automator for PCF plugin from PivNet.
-  - App Automator requires Pivotal Application Service (PAS) 2.2 or later. For more information about upgrading PAS, see [Upgrading PAS and Other Pivotal Cloud Foundry Products](https://docs.pivotal.io/pivotalcf/2-4/customizing/upgrading-products.html).
+  - The App Automator for PCF plugin, which you can download from [Pivotal Network](https://network.pivotal.io/products/p-app-automator/).
+  - Pivotal Application Service (PAS) 2.2 or later. For more information about upgrading PAS, see [Upgrading PAS and Other Pivotal Cloud Foundry Products](https://docs.pivotal.io/pivotalcf/2-4/customizing/upgrading-products.html).
 
 ## <a id='install'></a> Install App Automator for PCF
 
-The following section describes how to install the App Automator for PCF plugin. After installing the plugin, operators can use App Automator on or more spaces in their PCF deployment.
+The following section describes how to install the App Automator for PCF plugin. After installing the plugin, operators can use App Automator on one or more spaces in their PCF deployment.
 
-To install the App Automator for PCF plugin, run the following command in the cf CLI:
+To install the App Automator for PCF plugin, run the following command in the Cloud Foundry Command-Line Interface (cf CLI):
 
 <pre class="terminal">cf install-plugin PATH-TO-PLUGIN</pre>
 
@@ -61,7 +61,7 @@ App Automator generates a username for the user and saves the credentials as a u
 
 ### <a id='existing-user'></a> Configure Existing User Credentials
 
-This section describes how to use an existing user with Space Developer permissions for App Automator by saving the desired user credentials in a user-provided service called `pvtl-app-automator-credentials`.
+This section describes how to enable an existing Space Developer user to use App Automator, by saving their credentials in a user-provided service called `pvtl-app-automator-credentials`.
 
 For more information about user-provided services, see [User-Provided Service](https://docs.pivotal.io/tiledev/user-provided.html).
 
